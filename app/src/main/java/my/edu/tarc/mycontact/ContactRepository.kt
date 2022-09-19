@@ -19,6 +19,7 @@ class ContactRepository(private val contactDao: ContactDao) {
     @WorkerThread
     suspend fun  delete(contact: Contact){
         contactDao.delete(contact)
+
     }
 
     @WorkerThread
@@ -37,6 +38,12 @@ class ContactRepository(private val contactDao: ContactDao) {
             database.child("contact").child(id).child(contact.phone).child("phone").setValue(contact.phone)
             database.child("contact").child(id).child(contact.phone).child("name").setValue(contact.name)
         }
+    }
+
+    fun deleteContact(id:String,contact:Contact){
+        val database: DatabaseReference = Firebase.database.reference
+        database.child("contact").child(id).child(contact.phone).removeValue()
+
     }
 
 

@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_add -> {
+                contactViewModel.editMode = false
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.action_ContactFragment_to_addContactFragment)
                 true

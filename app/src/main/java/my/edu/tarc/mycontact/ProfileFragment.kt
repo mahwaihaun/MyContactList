@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import my.edu.tarc.mycontact.databinding.FragmentProfileBinding
 import my.edu.tarc.mycontact.databinding.FragmentSecondBinding
 import java.io.File
 import java.io.FileNotFoundException
@@ -23,7 +24,7 @@ import java.io.OutputStream
  */
 class ProfileFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -51,10 +52,12 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         readProfilePicture()
         return binding.root
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+
 
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -64,6 +67,8 @@ class ProfileFragment : Fragment() {
         menu.findItem(R.id.action_profile).isVisible = false
         menu.findItem(R.id.action_settings).isVisible = false
         menu.findItem(R.id.action_upload).isVisible = false
+        menu.findItem(R.id.action_delete).isVisible = false
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -111,7 +116,12 @@ class ProfileFragment : Fragment() {
                 uploadProfilePicture()
                 findNavController().navigateUp()
             }
+            android.R.id.home ->{
+                findNavController().navigateUp()
+
+            }
         }
+
         super.onOptionsItemSelected(item)
 
         return true

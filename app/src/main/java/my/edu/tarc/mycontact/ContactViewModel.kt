@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import my.edu.tarc.mycontact.database.ContactDatabase
 import my.edu.tarc.mycontact.entity.Contact
@@ -13,6 +16,8 @@ class ContactViewModel (application: Application)
         //TODO: Create an instance of dataset and repository
         var contactList: LiveData<List<Contact>>
         private val contactRepository: ContactRepository
+        var selectedContact: Contact = Contact("","")
+        var editMode: Boolean = false
 
         init {
             // Create an instance of DAO
@@ -32,6 +37,7 @@ class ContactViewModel (application: Application)
 
     fun delete(contact: Contact) = viewModelScope.launch {
         contactRepository.delete(contact)
+        deleteContact(contact)
     }
 
     fun update(contact: Contact) = viewModelScope.launch {
@@ -40,6 +46,10 @@ class ContactViewModel (application: Application)
 
     fun syncContact(){
         contactRepository.syncContact("123",contactList.value!!.toList())
+    }
+
+    fun deleteContact(contact:Contact){
+        contactRepository.deleteContact("123",contact)
     }
 
 }

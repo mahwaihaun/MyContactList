@@ -1,5 +1,6 @@
 package my.edu.tarc.mycontact
 
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import my.edu.tarc.mycontact.entity.Contact
 
 //an object linking data source to recycleView
-class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val onClickListener: contactOnClickListener) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     //Cache copy of data
     private var dataSet = emptyList<Contact>()
@@ -19,11 +20,12 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         val textName: TextView = view.findViewById(R.id.textViewName)
         val textPhone: TextView = view.findViewById<TextView>(R.id.textViewPhone)
 
-        init {
-            view.setOnClickListener{
-                //todo: handle click event
-            }
-        }
+    }
+
+    class contactOnClickListener(val clickListener: (contact:Contact)->Unit) {
+        fun onClick(contact: Contact) = clickListener(contact)
+
+
     }
 
     internal fun setContact(contact: List<Contact>){
@@ -42,6 +44,10 @@ class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
         val contact = dataSet[position]
         holder.textName.text = contact.name
         holder.textPhone.text = contact.phone
+
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(contact)
+        }
     }
 
     override fun getItemCount(): Int {

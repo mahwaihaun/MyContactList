@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
@@ -56,7 +57,7 @@ class ContactFragment : Fragment() {
             R.id.action_add->{
                 val navController = activity?.findNavController(R.id.nav_host_fragment_content_main)
                 navController?.navigate(R.id.action_ContactFragment_to_addContactFragment)
-                true
+                return true
             }
         }
         return true
@@ -64,6 +65,7 @@ class ContactFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.action_save).isVisible = false
+        menu.findItem(R.id.action_delete).isVisible = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,14 +82,18 @@ class ContactFragment : Fragment() {
         super.onResume()
 
         //val contactAdapter = ContactAdapter(MainActivity.contactList)
-        val contactAdapter = ContactAdapter()
+        val contactAdapter = ContactAdapter(ContactAdapter.contactOnClickListener{
+            //TODO: retrieve selected contact, pass it to the Edit Fragment
+            contactViewModel.selectedContact = it
+            contactViewModel.editMode = true
+            findNavController().navigate(R.id.action_ContactFragment_to_addContactFragment)
+        })
 
         contactViewModel.contactList.observe(viewLifecycleOwner){
-            if(it.isEmpty()){
-                Toast.makeText(context, getString(R.string.no_recrd), Toast.LENGTH_SHORT).show()
-            }else{
-                contactAdapter.setContact(it)
-            }
+            binding.textView3.isVisible = it.isEmpty()
+
+            contactAdapter.setContact(it)
+
         }
 
         binding.recycleViewContact.layoutManager = LinearLayoutManager(activity?.applicationContext)

@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.14" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/activity_main.xml" value="0.10157041540020263" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/contact_layout.xml" value="0.2" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/content_main.xml" value="0.10157041540020263" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/fragment_first.xml" value="0.25" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/fragment_profile.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="..\:/Users/TARUC/AndroidStudioProjects/MyContactList/app/src/main/res/menu/menu_main.xml" value="0.25" />
         <entry key="..\:/Users/TARUC/Downloads/MyContact-Databse-master/MyContact-Databse-master/app/src/main/res/layout/contact_layout.xml" value="0.358695652173913" />
         <entry key="..\:/Users/TARUC/Downloads/MyContact-Databse-master/MyContact-Databse-master/app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="..\:/Users/TARUC/Downloads/MyContact-Databse-master/MyContact-Databse-master/app/src/main/res/layout/fragment_add_contact.xml" value="0.1" />
